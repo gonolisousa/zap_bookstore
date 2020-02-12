@@ -15,10 +15,11 @@ class BooksController
 	{
 		$fileStatus = $this->checkFile();
 		
+		//fileStatus 1 = success
 		if($fileStatus === 1) {
 			$csv = array_map('str_getcsv', file('tmp/tmp.csv'));
 			$books = array();
-			$sum = 0;
+			$sum_price = 0;
 			for($i = 1; $i < sizeof($csv); $i++) {
 
 				switch ($csv[$i][0]) {
@@ -40,11 +41,11 @@ class BooksController
 
 				$book = new Book($type, $title, $isbn, $price, $authors);
 
-				$sum += $book->getPrice();
+				$sum_price += $book->getPriceWithDiscount();
 
 				array_push($books, $book);
 			}
-			return array(sizeof($csv)-1 , $sum, $books);
+			return array(sizeof($csv)-1 , $sum_price, $books);
 		} else {
 			return array(1, $fileStatus);
 		}
@@ -52,8 +53,6 @@ class BooksController
 
 	//Check Anomalies
 	private function checkFile() {
-		header('Content-Type: text/plain; charset=utf-8');
-
 		try {
 		   	//Check file errors
 		    if (!isset($_FILES['books']['error']) || is_array($_FILES['books']['error'])) {
