@@ -56,8 +56,16 @@ class Book {
 		return $this->isbn;
 	}
 
-	//Return price depending on book type
 	public function getPrice() {	
+		return $this->price;
+	}
+
+	public function getAuthors() {	
+		return $this->authors;
+	}
+
+	//Return price depending on book type
+	public function getPriceWithDiscount() {	
 		switch($this->type) {
 			case 1:
 				$discount = 0.1;
@@ -72,7 +80,8 @@ class Book {
 		return $this->price - ($this->price * $discount);
 	}
 
-	public function getAuthors() {
+	//return authors with formated string
+	public function getAuthorsString() {
 		$authors = "";
 		foreach ($this->authors as $author) {
 			$authors .= $author . ", ";
