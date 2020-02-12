@@ -4,8 +4,7 @@ Zap_Bookstore is a software to read csv files with book informations and render 
 
 ## Usage
 
-<?php
-
+```php
 use app\Controller\BooksController;
 
 $booksController = new BooksController(); 
@@ -13,16 +12,16 @@ $booksController = new BooksController();
 
 $bookinfo = $booksController->addBooks(); 
 //return book information in an array
-//(
-//    [0] => number of books,
-//    [1] => total price with discounts,
-//    [2] => array of book objects, //containing type, title, isbn, original price and authors
-//)
+(
+    [0] => number of books,
+    [1] => total price with discounts,
+    [2] => array of book objects, //containing type, title, isbn, original price and authors
+)
 //Can also return a array with file error
-//(
-//    [0] => error code,
-//    [1] => error message,
-//)
+(
+    [0] => error code,
+    [1] => error message,
+)
 
 use app\Books\Book;
 
@@ -34,5 +33,4 @@ $book->getPriceWithDiscount()
 
 $book->getAuthorsString()
 //returns authors formatted in a string with comma-separated values
-
-?>
+```
